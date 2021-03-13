@@ -11,6 +11,10 @@ public class Biblioteka implements BibliotekaInterface
 	@Override
 	public void dodajKnjigu(Knjiga knjiga) 
 	{
+		if(knjiga == null)
+			throw new NullPointerException("Knjiga ne sme biti null");
+		if(knjige.contains(knjiga))
+			throw new RuntimeException("Knjiga vec postoji");
 		knjige.add(knjiga);
 	}
 
@@ -29,6 +33,8 @@ public class Biblioteka implements BibliotekaInterface
 	@Override
 	public LinkedList<Knjiga> pronadjiKnjgu(Autor autor, String ISBN, String naslov, String izdavac) 
 	{
+		if(autor == null && ISBN == null && naslov == null && izdavac == null)
+			return knjige;
 		LinkedList<Knjiga> rezultat = new LinkedList<>();
 		for(Knjiga knjiga: knjige)
 			if(knjiga.getNaslov().contains(naslov))
